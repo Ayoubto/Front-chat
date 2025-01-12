@@ -1,7 +1,18 @@
 <<<<<<< HEAD
+
 # ChatApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+Chat-App est une application front-end construite avec Angular et stylisée avec TailwindCSS. Ce projet utilise Docker pour faciliter le déploiement et l'exécution de l'application.
+
+##Prérequis
+
+Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
+
+Node.js v18 ou une version ultérieure
+
+Docker
+
+Git
 
 ## Development server
 
