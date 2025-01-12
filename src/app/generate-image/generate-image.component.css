@@ -1,0 +1,4 @@
+textarea:focus {
+    border: none; /* Supprimer la bordure lors du focus */
+    outline: none; /* Supprimer le contour */
+  }

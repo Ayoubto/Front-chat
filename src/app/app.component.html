@@ -1,0 +1,17 @@
+<app-sidbar *ngIf="!isLoginRoute"></app-sidbar>
+
+<div class="ml-80  mr-28" *ngIf="!isLoginRoute">
+  <app-header></app-header>
+</div>
+
+<div class="ml-64 p-6" *ngIf="!isLoginRoute">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="isLoginRoute">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

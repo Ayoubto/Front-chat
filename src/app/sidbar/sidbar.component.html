@@ -1,0 +1,48 @@
+<div class="h-screen w-64 bg-[#20438F] text-white rounded-r-lg fixed">
+
+    <h2 class="text-center text-3xl font-bold py-4 border-b border-gray-600">Security Chat</h2>
+    <div class="flex flex-col justify-between h-[60%] ">
+        <ul class="mt-4 space-y-2">
+        <li>
+            <a routerLink="/chat"  
+            [class.active]="'/chat' === router.url  || router.url=='/'" class=" px-4 py-2 font-semibold text-xl hover:bg-[#C5198D]  h-[48px] mx-1.5 rounded-lg flex space-x-3">
+                <img src="assets/images/add-icon2.png" alt="icon" class="w-6 h-6">
+                <span> Start new chat</span> 
+            </a>
+        </li>
+        <li>
+            <a 
+            routerLink="/aichat"  
+            [class.active]="'/aichat' === router.url"
+            class="px-4 py-2 font-semibold text-xl hover:bg-[#C5198D] h-[48px] mx-1.5 rounded-lg flex space-x-3">
+            <img src="assets/images/Chat.png" alt="icon" class="w-6 h-6">
+            <span>AI chat</span>
+          </a>
+        </li>
+        <li>
+            <a routerLink="/image"  [class.active]="'/image' === router.url" class=" px-4 py-2 font-semibold text-xl hover:bg-[#C5198D]  h-[48px] mx-1.5 rounded-lg flex space-x-3">
+                <img src="assets/images/image-ai.png" alt="icon" class="w-6 h-6">
+                <span> AI image generator</span> 
+            </a>
+            
+        </li>
+        <li>
+            <a routerLink="/graph"  [class.active]="'/graph' === router.url"  class=" px-4 py-2 font-semibold text-xl hover:bg-[#C5198D]  h-[48px] mx-1.5 rounded-lg flex space-x-3">
+                <img src="assets/images/shield-check.png" alt="icon" class="w-6 h-6">
+                <span> Check vulnerability</span> 
+            </a>
+        </li>
+        </ul>
+        <div class="mt-4 space-y-2">
+                <div routerLink="/chat" class=" px-4 py-2 font-semibold text-xl hover:bg-[#C5198D]  h-[48px] mx-1.5 rounded-lg flex space-x-3">
+                 
+                    <span> History</span> 
+                </div>
+           
+        </div>
+    
+    </div>
+
+
+    
+  </div>
