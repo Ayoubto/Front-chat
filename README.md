@@ -19,10 +19,27 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
    git clone https://github.com/<votre-utilisateur>/chat-app.git
 
 
+2. Accédez au répertoire du projet  :
+
+   ```bash
+   cd chat-app
+
+
+
+3. Construction de l'image Docker :
+
+   ```bash
+   docker build -t chat-app .
+
+
 1. Clonez le dépôt GitHub :
 
    ```bash
    git clone https://github.com/<votre-utilisateur>/chat-app.git
+
+
+
+   
 
 2. Accédez au répertoire du projet  :
  ```bash
