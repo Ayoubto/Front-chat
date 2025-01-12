@@ -18,6 +18,12 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
    ```bash
    git clone https://github.com/<votre-utilisateur>/chat-app.git
 
+
+1. Clonez le dépôt GitHub :
+
+   ```bash
+   git clone https://github.com/<votre-utilisateur>/chat-app.git
+
 2. Accédez au répertoire du projet  :
  ```bash
  cd chat-app
