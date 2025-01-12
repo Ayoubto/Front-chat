@@ -4,7 +4,7 @@
 
 Chat-App est une application front-end construite avec Angular et stylisée avec TailwindCSS. Ce projet utilise Docker pour faciliter le déploiement et l'exécution de l'application.
 
-##Prérequis
+## Prérequis
 
 Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
