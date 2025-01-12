@@ -48,7 +48,7 @@
                 <input type="password" [(ngModel)]="passwordConfirmation_signup" class="p-3 border-2 rounded-lg" placeholder="*****************">
             </div>
             <div>
-                <button (click)="onSubmit()" class="bg-[#C5198D] text-white text-lg w-full h-11 rounded-xl">Sign in</button>
+                <button (click)=" onSubmit()" class="bg-[#C5198D] text-white text-lg w-full h-11 rounded-xl">Sign in</button>
             </div>
             <div class="flex space-x-1">
                 <p>You already have an account ?</p><span class="text-blue-500 cursor-pointer" (click)="showLogin()" > Log in</span>
@@ -69,4 +69,28 @@
       </div>
     </div>
   </div>
+  <!-- signup-success-popup.component.html -->
+  <div *ngIf="showPopup" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+      <div class="flex items-center justify-between border-b p-4">
+        <h3 class="text-xl font-semibold">Success</h3>
+        <button (click)="closePopup()" class="text-gray-400 hover:text-gray-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+               class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="p-4">
+        <p class="text-gray-600">Your registration was completed successfully!</p>
+      </div>
+      <div class="flex justify-end p-4">
+        <button (click)="closePopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+  
   

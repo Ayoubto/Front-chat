@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +8,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService,private router: Router) {}
   userDataSignin = {
     email_signup:'',
     password_signup:'',
@@ -42,8 +42,53 @@ export class LoginComponent {
       this.Lastname_signup = '';
       this.isLoginView = false;
     }
-  
+    
+    showPopup: boolean = false;
+
+  closePopup() {
+    this.showPopup = false;
+  }
+
+
+
     onSubmit() {
+      if (this.isLoginView) {
+        this.loginService.login(this.email, this.password).subscribe(response => {
+          console.log('Login successful:', response.token);
+          if (response.token) {
+            const dataToSend = true;
+            
+            localStorage.setItem('token', response.token);
+          }
+          this.router.navigate(['/chat']);
+        }, error => {
+          console.error('Login failed:', error);
+        });
+
+
+
+
+
+      } else {
+        const userData = {
+          email: this.email_signup,
+          password: this.password_signup,
+          confirmPassword: this.passwordConfirmation_signup,
+          firstname: this.Firstname_signup,
+          lastname: this.Lastname_signup
+        };
+        this.loginService.signup(userData).subscribe(response => {
+          console.log('Signup successful:', response);
+          this.showPopup=true
+          this.showLogin()
+        }, error => {
+          console.error('Signup failed:', error);
+        });
+      }
+    }
+
+
+    onSubmitlogin() {
       if (this.isLoginView) {
         this.loginService.login(this.email, this.password).subscribe(response => {
           console.log('Login successful:', response);
