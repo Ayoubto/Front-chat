@@ -31,30 +31,11 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
    ```bash
    docker build -t chat-app .
 
+4. Exécution du conteneur Docker:
 
-1. Clonez le dépôt GitHub :
-
-   ```bash
-   git clone https://github.com/<votre-utilisateur>/chat-app.git
-
-
-
-   
-
-2. Accédez au répertoire du projet  :
- ```bash
- cd chat-app
-
-3.  Construction de l'image Docker :
-  ```bash
- docker build -t chat-app .
-    
-
-4.  Exécution du conteneur Docker:
    ```bash
    docker run -p 4200:4200 chat-app
- 
-
+   
 
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
