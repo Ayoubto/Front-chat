@@ -1,29 +1,42 @@
-<<<<<<< HEAD
-# ChatApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+# Chat-App
 
-## Development server
+Chat-App est une application front-end construite avec Angular et stylisée avec TailwindCSS. Ce projet utilise Docker pour faciliter le déploiement et l'exécution de l'application.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prérequis
 
-## Code scaffolding
+Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Node.js](https://nodejs.org/) v18 ou une version ultérieure
+- [Docker](https://www.docker.com/)
+- [Git](https://git-scm.com/)
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clonez le dépôt GitHub :
 
-## Running unit tests
+   ```bash
+   git clone https://github.com/<votre-utilisateur>/chat-app.git
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+2. Accédez au répertoire du projet  :
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   cd chat-app
 
-## Further help
+
+
+3. Construction de l'image Docker :
+
+   ```bash
+   docker build -t chat-app .
+
+4. Exécution du conteneur Docker:
+
+   ```bash
+   docker run -p 4200:4200 chat-app
+   
+
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 =======
