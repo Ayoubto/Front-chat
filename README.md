@@ -20,16 +20,16 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 2. Accédez au répertoire du projet  :
  ```bash
-        cd chat-app
+ cd chat-app
 
 3.  Construction de l'image Docker :
-     ```bash
-        docker build -t chat-app .
+  ```bash
+ docker build -t chat-app .
     
 
 4.  Exécution du conteneur Docker:
    ```bash
-       docker run -p 4200:4200 chat-app
+   docker run -p 4200:4200 chat-app
  
 
 
