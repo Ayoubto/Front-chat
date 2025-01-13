@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';  // Importation du CommonModule
 import { RagService } from '../services/rag.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-chat-ai',
   templateUrl: './chat-ai.component.html',
@@ -16,28 +19,32 @@ export class ChatAiComponent {
     this.isClickable = this.userQuestion.trim() !== ''; // Active si le texte n'est pas vide
   }
 
+  token: string | null = null;
+  decodedToken: any;
+  ngOnInit() {
+    this.token = localStorage.getItem('token');
 
-  messages = [
-    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
-    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
-    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
-    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' },
-    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
-    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
-    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
-    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' },
-    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
-    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
-    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
-    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' }
-  
-  
-  ];
+    if (this.token) {
+      const isExpired = this.jwtHelper.isTokenExpired(this.token);
+      console.log('Le token est expiré ?', isExpired);
+
+      this.decodedToken = this.jwtHelper.decodeToken(this.token);
+      console.log('Données décodées du token :', this.decodedToken);
+      this.id=this.decodedToken.id
+    } else {
+      console.log('Aucun token trouvé.');
+      this.router.navigate(['/login']);
+    }
+  }
+
+
+
+
 
 
   chatForm: FormGroup;
  
-  constructor(private fb: FormBuilder, private RagService: RagService) {
+  constructor(private fb: FormBuilder, private RagService: RagService,private jwtHelper: JwtHelperService,private router: Router) {
     // Initialisation du formulaire avec FormBuilder
     this.chatForm = this.fb.group({
       message: ['', [Validators.required, Validators.minLength(1)]]
@@ -46,7 +53,7 @@ export class ChatAiComponent {
   datachat:any=""
   response: any; // Pour stocker la réponse API
   error: any;  
-   id = '67830f1c96a5ad472a6ff413'; 
+   id = ''; 
  
    sessionId:string= '';
    
@@ -119,5 +126,22 @@ Asksecond(){
 }
 
 
+
+  messages = [
+    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
+    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
+    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
+    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' },
+    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
+    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
+    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
+    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' },
+    { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
+    { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
+    { sender: 'user', text: 'Can you explain more about data encryption?', timestamp: '10:02 AM' },
+    { sender: 'ai', text: 'Data encryption ensures that sensitive data is secure both in transit and at rest.', timestamp: '10:03 AM' }
+  
+  
+  ];
 
 }

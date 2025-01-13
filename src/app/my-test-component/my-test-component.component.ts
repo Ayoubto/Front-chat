@@ -7,5 +7,4 @@ import { MyTestServiceService } from '../my-test-service.service';
 })
 export class MyTestComponentComponent {
   constructor(private apiService: MyTestServiceService) { }
-
 }

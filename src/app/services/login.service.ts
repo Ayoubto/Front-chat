@@ -7,8 +7,8 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  private apiUrl="http://localhost:8080/api/users"
-  private apiUrl2 = 'http://localhost:8080/welcom';
+  private apiUrl="http://localhost:9090/api/users"
+  private apiUrl2 = 'http://localhost:9090/welcom';
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
