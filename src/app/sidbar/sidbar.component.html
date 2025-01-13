@@ -36,8 +36,11 @@
         <div class="mt-4 space-y-2">
                 <div routerLink="/chat" class=" px-4 py-2 font-semibold text-xl hover:bg-[#C5198D]  h-[48px] mx-1.5 rounded-lg flex space-x-3">
                  
-                    <span> History</span> 
+                    <span (click)="AllHistory()"> History</span> 
+                    
                 </div>
+                {{response["messages"]}}
+
            
         </div>
     

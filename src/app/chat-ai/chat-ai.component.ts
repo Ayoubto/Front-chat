@@ -8,6 +8,8 @@ import { RagService } from '../services/rag.service';
   styleUrl: './chat-ai.component.css'
 })
 export class ChatAiComponent {
+
+  showAll:boolean=false
   messages = [
     { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
     { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
@@ -34,11 +36,13 @@ export class ChatAiComponent {
       message: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
-
+  datachat:any=""
   response: any; // Pour stocker la réponse API
   error: any;  
    id = '67830f1c96a5ad472a6ff413'; 
    userQuestion: string = '';
+   sessionId:string= '';
+   
   startSession() {
    
     const userData = {
@@ -46,10 +50,14 @@ export class ChatAiComponent {
     }
     console.log('Corps de la requête envoyé à l’API :', userData);
     this.RagService.start_session(userData).subscribe(
-      (data) => {
-        this.askQuestion()
+      (data:any) => {
+        
         this.response = data; // Stockez la réponse
-        console.log('Session démarrée avec succès :', data);
+        console.log('Session démarrée avec succès :', data["session_id"]);
+        this.sessionId=data["session_id"]
+        this.askQuestion()
+        
+        
       },
       (error) => {
         this.error = error; // Stockez l'erreur
@@ -62,13 +70,16 @@ export class ChatAiComponent {
 
   askQuestion() {
     const requestData = {
-      session_id: '07cc132a-596a-4773-9468-58b39ec07bd9',
+      session_id: this.sessionId,
       question: this.userQuestion,
     };
   
     this.RagService.ASK(requestData).subscribe(
       (response) => {
         console.log('Réponse de l\'API :', response);
+        this.userQuestion=""
+        this.fetchSessionHistory()
+        
       },
       (error) => {
         console.error('Erreur lors de l\'envoi de la question :', error);
@@ -76,16 +87,30 @@ export class ChatAiComponent {
     );
   }
 
-
-
-
-
-  // Méthode pour soumettre le formulaire
-  onSubmit(): void {
-    if (this.chatForm.valid) {
-      console.log(this.chatForm.value);
-    } else {
-      console.error('Le formulaire est invalide');
-    }
+  fetchSessionHistory() {
+    this.RagService.getSessionHistory(this.sessionId).subscribe(
+      (response:any) => {
+        console.log('Historique de session :', response);
+        this.datachat=response["history"]
+        console.log(this.datachat)
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération de l\'historique de session :', error);
+      }
+    );
   }
+
+
+Askfirst(){
+  this.showAll=true
+  this.startSession()
+}
+
+Asksecond(){
+  this.showAll=true
+  this.askQuestion()
+}
+
+
+
 }

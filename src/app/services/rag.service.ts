@@ -37,4 +37,27 @@ export class RagService {
   }
 
 
+  getSessionHistory(sessionId: string): Observable<any> {
+    const url = `${this.apiUrl}/session_history`;
+    const body = { session_id: sessionId };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(url, body, { headers });
+  }
+
+  AllHistory(UserId: string): Observable<any> {
+    const url = `${this.apiUrl}/user_history`;
+    const body = { user_id: UserId };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(url, body, { headers });
+  }
+
+
+  
+
 }
