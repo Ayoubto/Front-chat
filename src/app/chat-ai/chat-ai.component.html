@@ -1,3 +1,7 @@
+
+
+
+
 <div class="flex justify-center mt-32 flex-col">
     <div>
         <div class="space-y-6">
@@ -6,8 +10,8 @@
         </div> 
         <div class="flex justify-center w-full place-items-center">
             <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2 ">
-                <textarea rows="5"  cols="1"   placeholder="Saisissez votre texte ici..." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
-                <img  src="assets/images/send.png" alt="icon" class="w-14 h-14  bg-[#C5198D] p-3 rounded-lg">  
+                <textarea rows="5"  cols="1" [(ngModel)]="userQuestion"   placeholder="Saisissez votre texte ici..." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
+                <img  src="assets/images/send.png" alt="icon" (click)="startSession()"  class="w-14 h-14 cursor-pointer  bg-[#C5198D] p-3 rounded-lg">  
        
                 
             </div>  
@@ -22,7 +26,11 @@
 
 </div>
 
-<div class="space-y-4">
+
+
+<div class="hidden">
+  <!-- Group 1: Messages -->
+<div class=" h-full overflow-auto ">
   <div 
     *ngFor="let message of messages" 
     class="flex items-center space-x-4"
@@ -41,5 +49,19 @@
     </div>
   </div>
 </div>
+
+<!-- Group 2: Textarea and Send Button -->
+<div class=" fixed bottom-0 py-5 w-5/6 mr-64 bg-white">
+  <div class="flex justify-center w-full place-items-center">
+    <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2">
+      <textarea rows="5" cols="1" placeholder="Saisissez votre texte ici..." class="w-full h-16 placeholder:text-black placeholder:text-lg" style="resize: none;"></textarea>
+      <img src="assets/images/send.png" alt="icon" class="w-14 h-14 bg-[#C5198D] p-3 rounded-lg">
+    </div>
+  </div>
+</div>
+
+</div>
+
+
 
 
