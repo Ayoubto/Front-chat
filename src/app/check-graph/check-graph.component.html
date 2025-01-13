@@ -1,16 +1,56 @@
-<div class="flex justify-center mt-32 flex-col">
-    <div>
-        <div class="space-y-6">
-        <p class="text-[48px] flex justify-center font-semibold">What can I help with?</p>
-        
-        </div> 
-        <div class="flex justify-center w-full place-items-center">
-            <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2 ">
-                <textarea rows="5"  cols="1"   placeholder="Describe your network to check for vulnerabilities...." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
-                <img  src="assets/images/send.png" alt="icon" class="w-14 h-14  bg-[#C5198D] p-3 rounded-lg">  
-       
-                
-            </div>  
+<div class="flex justify-center mt-16 flex-col space-y-8">
+    <p class="text-[36px] flex justify-center font-semibold">Network Configuration</p>
+  
+    <!-- Section pour ajouter des relations -->
+    <div class="flex flex-col space-y-4">
+      <p class="text-lg font-medium">Add Edges (Relationships):</p>
+      <div id="edges-container" class="space-y-2">
+        <div *ngFor="let edge of edges; let i = index" class="flex space-x-4 items-center">
+          <span>Node 1: {{ edge[0] }}, Node 2: {{ edge[1] }}, Weight: {{ edge[2] }}</span>
+          <button type="button" (click)="removeEdge(i)" class="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
         </div>
-     
+      </div>
+      <div class="flex space-x-4 items-center">
+        <input #node1 type="number" min="0" placeholder="Node 1" class="w-20 border p-2 rounded">
+        <input #node2 type="number" min="0" placeholder="Node 2" class="w-20 border p-2 rounded">
+        <input #weight type="number" min="0" max="1" step="0.1" placeholder="Weight (0-1)" class="w-28 border p-2 rounded">
+        <button type="button" (click)="addEdge(node1.valueAsNumber, node2.valueAsNumber, weight.valueAsNumber)" class="bg-blue-500 text-white px-4 py-2 rounded">Add Edge</button>
+      </div>
     </div>
+  
+    <!-- Section pour les nœuds infectés 
+    <div class="flex flex-col space-y-4">
+      <p class="text-lg font-medium">Initial Infected Nodes:</p>
+      <textarea [(ngModel)]="initialInfectedInput" rows="3" placeholder="[2]" class="border p-3 rounded w-full"></textarea>
+    </div>
+  -->
+    <!-- Section pour ajouter des seuils -->
+    <div class="flex flex-col space-y-4">
+      <p class="text-lg font-medium">Node Thresholds:</p>
+      <div id="thresholds-container" class="space-y-2">
+        <div *ngFor="let key of objectKeys(nodeThresholds)" class="flex space-x-4 items-center">
+            <span>Node: {{ key.toString() }}, Threshold: {{ nodeThresholds[key] }}</span>
+
+          <button type="button" (click)="removeThreshold(key)" class="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
+        </div>
+      </div>
+      <div class="flex space-x-4 items-center">
+        <input #node type="number" min="0" placeholder="Node" class="w-20 border p-2 rounded">
+        <input #threshold type="number" min="0" max="1" step="0.1" placeholder="Threshold (0-1)" class="w-28 border p-2 rounded">
+        <button type="button" (click)="addThreshold(node.valueAsNumber, threshold.valueAsNumber)" class="bg-blue-500 text-white px-4 py-2 rounded">Add Threshold</button>
+      </div>
+    </div>
+  
+    <!-- Bouton pour envoyer les données -->
+    <div class="flex justify-center">
+      <button (click)="submitForm()" class="bg-green-500 text-white px-6 py-3 rounded text-lg">Submit</button>
+
+    </div>
+      <!-- Afficher l'image générée -->
+  <div>
+    <h4>Generated Visualization:</h4>
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Network Graph">
+  </div>
+</div>
+ 
+  
