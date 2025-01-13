@@ -12,6 +12,7 @@ import { SidbarComponent } from './sidbar/sidbar.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';  // Importation de FormsModule ici
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,10 +29,16 @@ import { FormsModule } from '@angular/forms';  // Importation de FormsModule ici
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'), // Récupération du token depuis localStorage
+        allowedDomains: ['http://localhost:8080'], // Remplacez par votre domaine API
+      }
+    }),
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

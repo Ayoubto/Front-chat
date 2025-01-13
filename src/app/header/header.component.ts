@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,7 +10,28 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(public router: Router) {}
+
+
+
+  constructor(public router: Router ,private jwtHelper: JwtHelperService) {}
+  token: string | null = null;
+  decodedToken: any;
+  ngOnInit() {
+    // Récupérer le token depuis localStorage
+    this.token = localStorage.getItem('token');
+
+    if (this.token) {
+      // Vérifier si le token est expiré
+      const isExpired = this.jwtHelper.isTokenExpired(this.token);
+      console.log('Le token est expiré ?', isExpired);
+
+      // Décoder le token
+      this.decodedToken = this.jwtHelper.decodeToken(this.token);
+      console.log('Données décodées du token :', this.decodedToken);
+    } else {
+      console.log('Aucun token trouvé.');
+    }
+  }
   getDynamicText() {
     if (this.router.url === '/chat') {
       return 'Start new chat';
