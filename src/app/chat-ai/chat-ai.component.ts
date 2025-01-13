@@ -10,6 +10,13 @@ import { RagService } from '../services/rag.service';
 export class ChatAiComponent {
 
   showAll:boolean=false
+  isClickable: boolean = false; 
+  userQuestion: string = '';
+  checkInput() {
+    this.isClickable = this.userQuestion.trim() !== ''; // Active si le texte n'est pas vide
+  }
+
+
   messages = [
     { sender: 'user', text: 'What are the security protocols?', timestamp: '10:00 AM' },
     { sender: 'ai', text: 'Security protocols include multi-factor authentication and data encryption.', timestamp: '10:01 AM' },
@@ -40,7 +47,7 @@ export class ChatAiComponent {
   response: any; // Pour stocker la réponse API
   error: any;  
    id = '67830f1c96a5ad472a6ff413'; 
-   userQuestion: string = '';
+ 
    sessionId:string= '';
    
   startSession() {

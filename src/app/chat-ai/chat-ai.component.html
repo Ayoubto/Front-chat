@@ -11,7 +11,8 @@
         <div class="flex justify-center w-full place-items-center">
             <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2 ">
                 <textarea rows="5"  cols="1" [(ngModel)]="userQuestion"   placeholder="Saisissez votre texte ici..." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
-                <img  src="assets/images/send.png" alt="icon" (click)="Askfirst()"  class="w-14 h-14 cursor-pointer  bg-[#C5198D] p-3 rounded-lg">  
+                <img  src="assets/images/send.png" alt="icon"   
+                (click)="Askfirst()"  class="w-14 h-14 cursor-pointer disabled bg-[#C5198D] p-3 rounded-lg">  
        
                 
             </div>  
