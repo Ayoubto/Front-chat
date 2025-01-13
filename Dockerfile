@@ -12,7 +12,8 @@ COPY package*.json ./
 
 # Installez les dépendances
 RUN npm install
-
+RUN npm install @auth0/angular-jwt
+RUN npm install jwt-decode        
 # Copiez le reste du code source
 COPY . .
 
