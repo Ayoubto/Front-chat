@@ -1,14 +1,14 @@
-<div class="flex justify-center mt-16 flex-col space-y-8">
-    <!-- Partie formulaire -->
-    <div class="w-1/2 flex flex-col space-y-4">
+<!-- Partie 1 -->
+<div class="flex space-x-10">
+    <div class="w-1/8 flex flex-col space-y-10">
         <p class="text-[36px] flex justify-center font-semibold">Network Configuration</p>
-      
+
         <!-- Section pour ajouter des relations -->
-        <div class="flex flex-col space-y-4">
-            <p class="text-lg font-medium">Add Edges (Relationships):</p>
-            <div id="edges-container" class="space-y-2">
+        <div class="flex flex-col space-y-5">
+            <p class="text-lg font-medium">relationship between machines in the network </p>
+            <div id="edges-container" class="space-y-3">
                 <div *ngFor="let edge of edges; let i = index" class="flex space-x-4 items-center">
-                    <span>Node 1: {{ edge[0] }}, Node 2: {{ edge[1] }}, Weight: {{ edge[2] }}</span>
+                    <span>Machine 1 : {{ edge[0] }}, Machine 2: {{ edge[1] }}, Weight: {{ edge[2] }}</span>
                     <button type="button" (click)="removeEdge(i)" class="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
                 </div>
             </div>
@@ -22,10 +22,10 @@
 
         <!-- Section pour les nœuds infectés -->
         <div class="flex flex-col space-y-4">
-            <p class="text-lg font-medium">Node Thresholds:</p>
+            <p class="text-lg font-medium">Machine thresholds :</p>
             <div id="thresholds-container" class="space-y-2">
                 <div *ngFor="let key of objectKeys(nodeThresholds)" class="flex space-x-4 items-center">
-                    <span>Node: {{ key.toString() }}, Threshold: {{ nodeThresholds[key] }}</span>
+                    <span>Machine: {{ key.toString() }}, Threshold: {{ nodeThresholds[key] }}</span>
                     <button type="button" (click)="removeThreshold(key)" class="bg-red-500 text-white px-4 py-2 rounded">Remove</button>
                 </div>
             </div>
@@ -37,16 +37,20 @@
         </div>
 
         <!-- Bouton pour envoyer les données -->
-        <div class="flex justify-center ">
-            <button (click)="submitForm()" class="bg-green-500 text-white px-6 py-3 rounded text-lg">Submit</button>
+        <div class="flex justify-center">
+            <button (click)="submitForm()" class="bg-red-500 text-white px-2 py-2 rounded text-lg">scan the network</button>
         </div>
     </div>
 
-    <!-- Partie image -->
-    <div class="w-1/2 flex justify-center space-x-8">
+    <!-- Partie 2 -->
+    <div class="w-1/4 flex justify-center">
         <div>
-            <h4>Generated Visualization:</h4>
-            <img *ngIf="imageBase64" [src]="imageBase64" alt="Generated Image" class="w-64 h-64 object-contain">
+            
+            <div *ngIf="imageBase64">
+                <h4 class="text-lg font-medium" >Graph of network</h4>
+            <img  [src]="imageBase64" alt="Generated Image" class="w-64 h-64 object-contain">
+            <span class=" font-medium"  >Red indicates that the machine is under threat, while blue indicates that it is not.</span>
+        </div>
         </div>
     </div>
 </div>
