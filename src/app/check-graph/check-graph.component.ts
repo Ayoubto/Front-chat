@@ -11,7 +11,7 @@ export class CheckGraphComponent {
   initialInfected: number[] = [];
   initialInfectedInput: string = '[2]'; // Pour le textarea
   nodeThresholds: { [key: string]: number } = {};
-  imageUrl : any;
+  imageBase64 : any;
  constructor(private dataService: GraphServiceService){}
   // Récupérer les clés d'un objet
   objectKeys(obj: { [key: number]: number }): string[] {
@@ -37,7 +37,7 @@ export class CheckGraphComponent {
   removeThreshold(node: string): void {
     delete this.nodeThresholds[+node];
   }
-
+ 
   submitForm(): void {
     try {
       this.initialInfected = JSON.parse(this.initialInfectedInput);
@@ -69,13 +69,15 @@ export class CheckGraphComponent {
   
     this.dataService.submitData(this.edges, this.initialInfected, this.nodeThresholds).subscribe({
       next: (response) => {
-        if (response instanceof Blob) {
-          const url = URL.createObjectURL(response);
-          this.imageUrl = url;  // Assign the image URL for display
-        } else if (typeof response === 'string') {
-          this.imageUrl = response;  // If the response is already a string URL
-        } else {
-          console.error('Unexpected response format');
+        try {
+          if (response && response.image_base64) {
+            this.imageBase64 = `data:image/png;base64,${response.image_base64}`;  // Affiche l'image décodée en Base64
+          } else {
+            throw new Error('Unexpected response format');
+          }
+        } catch (error) {
+          console.error('Error processing response:', error);
+          alert('Failed to process the response. Please check the console for more details.');
         }
       },
       error: (err) => {
@@ -83,11 +85,7 @@ export class CheckGraphComponent {
         alert('Failed to send data to the API.');
       },
     });
-  
-    console.log('Formatted Data for Postman:', JSON.stringify(result, null, 2));
-    alert('Data formatted and ready for Postman! Check console for details.');
   }
-  
   
 
 }
