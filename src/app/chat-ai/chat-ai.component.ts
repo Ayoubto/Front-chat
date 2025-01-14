@@ -60,7 +60,7 @@ export class ChatAiComponent {
   startSession() {
    
     const userData = {
-      user_id:this.id
+      user_id:"hdzdhh76253t35ezdt5325e"
     }
     console.log('Corps de la requête envoyé à l’API :', userData);
     this.RagService.start_session(userData).subscribe(
