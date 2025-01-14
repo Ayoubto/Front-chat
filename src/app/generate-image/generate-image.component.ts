@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class GenerateImageComponent {
    constructor(private RagService: RagService,private jwtHelper: JwtHelperService,private router: Router, private ImageDiffusionService:ImageDiffusionService) {}
   showAll:boolean=false
-  id:string="zze666zv4bdzd6rur"
+  id:string="dteftefteggeve4b45555"
   response:any
   Userprompt: string = '';
    startSession() {
@@ -43,7 +43,7 @@ export class GenerateImageComponent {
       class_guidance:7,
       num_imgs:1,
       seed:11,
-      session_id:"hshd55dtde5d5detde6tde6dt"
+      session_id:"hshd55dtde5d5detd#8888e6tde6dt"
     }
 
     console.log('Corps de la requête envoyé à l’API :', userData);
@@ -67,7 +67,7 @@ export class GenerateImageComponent {
 
   images:any
   getAllImage(){
-    const sessionId = 'hshd55dtde5d5detde6tde6dt'; // Remplacez par votre session_id
+    const sessionId = 'hshd55dtde5d5detd#8888e6tde6dt'; // Remplacez par votre session_id
     this.ImageDiffusionService.getImagesBySession(sessionId).subscribe({
       next: (data) => {
         this.images = data["images"];
