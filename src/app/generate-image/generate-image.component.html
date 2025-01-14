@@ -1,4 +1,4 @@
-<div class="flex justify-center mt-32 flex-col">
+<div class=" justify-center mt-32 flex-col hidden">
     <div>
         <div class="space-y-6">
         <p class="text-[48px] flex justify-center font-semibold">What can I help with?</p>
@@ -6,11 +6,74 @@
         </div> 
         <div class="flex justify-center w-full place-items-center">
             <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2 ">
-                <textarea rows="5"  cols="1"   placeholder="Describe your image...." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
-                <img  src="assets/images/send.png" alt="icon" class="w-14 h-14  bg-[#C5198D] p-3 rounded-lg">  
-       
-                
+                <textarea rows="5"  cols="1" [(ngModel)]="Userprompt"   placeholder="Describe your image...." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
+                <img  (click)="generateImage()" src="assets/images/send.png" alt="icon" class="w-14 h-14 cursor-pointer bg-[#C5198D] p-3 rounded-lg">  
+                    
             </div>  
+            <img (click)="getAllImage()" *ngIf="imageBase64" [src]="imageBase64" alt="Generated Image">
         </div>
      
     </div>
+</div>
+
+
+    <div *ngIf="!showAll" class="flex justify-center mt-32 flex-col">
+        <div>
+            <div class="space-y-6">
+            <p class="text-[48px] flex justify-center font-semibold">What can I help with?</p>
+            
+            </div> 
+            <div class="flex justify-center w-full place-items-center">
+                <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2 ">
+                    <textarea rows="5"  cols="1" [(ngModel)]="Userprompt"   placeholder="Saisissez votre texte ici..." class=" w-full h-16  placeholder:text-black placeholder:text-lg"  style="resize: none;"></textarea>        
+                    <img  src="assets/images/send.png" alt="icon"   
+                    (click)="generateImage()"  class="w-14 h-14 cursor-pointer disabled bg-[#C5198D] p-3 rounded-lg">  
+           
+                    
+                </div>  
+            </div>
+         
+        </div>
+    
+    
+    
+    
+    
+    
+    </div>
+
+
+
+
+    <div *ngIf="showAll">
+        <!-- Group 1: Messages -->
+      <div class=" h-full overflow-auto mb-52">
+        <div *ngFor="let message of images" class="flex flex-col space-x-4 space-y-2 " >
+          <div class="flex flex-col space-y-1 ml-auto text-right mt-5">
+            <p class="px-4 py-2 rounded-lg text-sm bg-gray-200 text-black">
+              {{ message.prompt }}</p>
+          </div>
+      
+          <div class="flex flex-col space-y-1 mr-auto text-left w-auto mb-2">
+            <div class="px-4 py-2 rounded-lg ">
+                <img (click)="getAllImage()"   *ngIf="message.prompt" [src]="'data:image/jpeg;base64,' + message.image_base64"  alt="Generated Image">
+            
+            </div>
+          </div>
+      
+      
+        </div>
+      </div>
+      
+      <!-- Group 2: Textarea and Send Button -->
+      <div class=" fixed bottom-0 py-5 w-5/6 mr-64 bg-white">
+        <div class="flex justify-center w-full place-items-center">
+          <div class="border-2 border-[#33363F] mt-8 rounded-sm w-3/4 p-3 flex space-x-2">
+            <textarea rows="5" cols="1" [(ngModel)]="Userprompt" placeholder="Saisissez votre texte ici..." class="w-full h-16 placeholder:text-black placeholder:text-lg" style="resize: none;"></textarea>
+            <img src="assets/images/send.png" (click)="generateImage()" alt="icon" class="w-14 cursor-pointer h-14 bg-[#C5198D] p-3 rounded-lg">
+          </div>
+        </div>
+      </div>
+      
+      </div>
+    

@@ -12,11 +12,18 @@ export class HeaderComponent {
 
 
 
-
   constructor(public router: Router ,private jwtHelper: JwtHelperService) {}
   token: string | null = null;
   decodedToken: any;
   ngOnInit() {
+
+    if (typeof window === 'undefined') {
+      console.error('Window is undefined. Are you running in a server-side environment?');
+    } else if (typeof localStorage === 'undefined') {
+      console.error('localStorage is undefined.');
+    } else {
+      console.log('Environment looks fine. Proceeding...');
+    }
     // Récupérer le token depuis localStorage
     this.token = localStorage.getItem('token');
 
